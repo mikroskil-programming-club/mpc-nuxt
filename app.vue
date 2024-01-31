@@ -31,9 +31,22 @@ const material = [
 ]
 const callsToAction = { name: 'Contact us', href: '#', icon: InboxIcon }
 
+import {useStore} from './store/store.js'
+const store = useStore()
+const router = useRouter()
+
+function handleLogout(){
+  store.reset()
+  router.push('/')
+}
+
+onMounted(()=>{{
+  if(localStorage.getItem('token')){
+    store.setToken(localStorage.getItem('token'),localStorage.getItem('auth'),true)
+  }
+}})
 
 const mobileMenuOpen = ref(false)
-const isAuthenticated = ref(true)
 </script>
 <template>
   <header class="z-1 border-b bg-white/30 backdrop-blur-md">
@@ -52,7 +65,7 @@ const isAuthenticated = ref(true)
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
-          <PopoverButton v-if="isAuthenticated" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+          <PopoverButton v-if="store.isAuthenticated" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
             Material
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
@@ -88,8 +101,9 @@ const isAuthenticated = ref(true)
         <NuxtLink to="/events" class="text-sm font-semibold leading-6 text-gray-900">Events</NuxtLink>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <NuxtLink to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
-        <NuxtLink to="/register" class="text-sm font-semibold leading-6 text-gray-900">Register <span aria-hidden="true">&rarr;</span></NuxtLink>
+        <NuxtLink v-if="store.isAdmin" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
+        <a @click="handleLogout" v-if="store.isAuthenticated" class="text-sm ml-6 font-semibold leading-6 text-gray-900">Logout</a>
+        <NuxtLink v-if="!store.isAuthenticated" to="/register" class="text-sm font-semibold leading-6 text-gray-900">Register <span aria-hidden="true">&rarr;</span></NuxtLink>
       </div>
     </nav>
     <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -122,8 +136,10 @@ const isAuthenticated = ref(true)
               <a href="/events" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Events</a>
             </div>
             <div class="py-6">
-              <a href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Register</a>
-              <a href="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+              <a v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</a>
+              <a @click="handleLogout" v-if="store.isAuthenticated" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</a>
+              <a v-if="!store.isAuthenticated" href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Register</a>
+              <a v-if="!store.isAuthenticated" href="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
             </div>
             <div class="py-6">
               <a href="/contact-us" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact Us</a>

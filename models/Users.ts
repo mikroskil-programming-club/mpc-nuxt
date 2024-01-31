@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     }, //Display di profile, dan members modal
     paid:{
         type: Boolean,
-    }, //Display di profile, dan 
+    }, //Display di profile, dan members
     password:{
         type: String,
     }, //Display di profile, dan members modal (sebagai bcrypt, dapat diubah oleh admin) [ dapat diubah member ]

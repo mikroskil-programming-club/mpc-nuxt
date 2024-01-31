@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     plugins: ['~/server/index.ts']
   },
   runtimeConfig:{
-    mongodbURI: process.env.MONGODB_URI
+    mongodbURI: process.env.MONGODB_URI,
+    tokenKey: process.env.SECRET_TOKEN_KEY
   },
   postcss: {
     plugins: {
@@ -14,4 +15,8 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: ['@pinia/nuxt'],
+  pinia:{
+    storesDirs:['./stores/**']
+  }
 })
