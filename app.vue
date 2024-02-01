@@ -126,15 +126,15 @@ const mobileMenuOpen = ref(false)
                   <DisclosureButton v-for="item in [...material]" :key="item.name" as="a" :href="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
                 </DisclosurePanel>
               </Disclosure>
-              <a href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</a>
-              <a href="/schedule" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Schedule</a>
-              <a href="/events" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Events</a>
+              <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" href="/schedule" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Schedule</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" href="/events" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Events</NuxtLink>
             </div>
             <div class="py-6">
-              <a v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</a>
-              <a @click="handleLogout" v-if="store.isAuthenticated" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</a>
-              <a v-if="!store.isAuthenticated" href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Register</a>
-              <a v-if="!store.isAuthenticated" href="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+              <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</NuxtLink>
+              <NuxtLink @click="handleLogout" v-if="store.isAuthenticated" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" v-if="!store.isAuthenticated" href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Register</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" v-if="!store.isAuthenticated" href="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</NuxtLink>
             </div>
             <div class="py-6">
               <a href="/contact-us" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact Us</a>

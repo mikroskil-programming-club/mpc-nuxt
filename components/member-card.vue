@@ -5,12 +5,14 @@
     import {useStore} from '~/store/store.js'
 
     const props = defineProps(['nim', 'name', 'paid', 'semester', 'prodi'])
-    console.log(props.prodi)
 
     const isModalOpen = ref(false)
     const modal = ref(null)
     const router = useRouter()
     const store = useStore()
+
+    const paid = ref(props.paid)
+
     onClickOutside(modal, ()=>{
         isModalOpen.value = false
     })
@@ -22,9 +24,10 @@
         })
         if(response.data.status == 400 || response.data.status == 401){
             store.reset()
-            router.go(0)
+            router.push("/login")
         }
-        router.go(0)
+        isModalOpen.value = false
+        paid.value = !Boolean(paid.value)
     }
 </script>
 
@@ -32,10 +35,10 @@
     <div @click="isModalOpen = true" class="border border-solid bg-white/30 backdrop-filter-md border-gray-200 rounded-md p-4 h-auto md:w-[auto] md:max-w-[400px]">
         <div>NIM Mahasiswa     : {{ props.nim }}</div>
         <div>Nama Mahasiswa    : {{ props.name }}</div>
-        <div v-if="!props.paid">Status pembayaran :
+        <div v-if="!paid">Status pembayaran :
              <div class="text-red-300" >Uncompleted</div>
             </div>
-        <div v-if="props.paid">Status pembayaran :
+        <div v-if="paid">Status pembayaran :
              <div class="text-green-300" >Completed</div>
             </div>
     </div>
@@ -62,8 +65,8 @@
                         </div>
                         <div class="flex flex-col gap-1">
                             <div>Status pembayaran</div>
-                            <div class="text-green-300" v-if="props.paid">Completed</div>
-                            <div class="text-red-300" v-if="!props.paid">Uncompleted</div>
+                            <div class="text-green-300" v-if="paid">Completed</div>
+                            <div class="text-red-300" v-if="!paid">Uncompleted</div>
                             <button @click="changeStatus" class="mt-2 rounded-md p-2 bg-gray-200 hover:bg-gray-300">Ubah status</button>
                         </div>
                     </div>
