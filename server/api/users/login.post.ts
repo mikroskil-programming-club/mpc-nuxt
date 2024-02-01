@@ -21,14 +21,12 @@ export default defineEventHandler(async (event)=>{
             statusMessage: "Anggota belum mendaftarkan akun ke website MPC."
         })
     }
-    try{
-        const compares = await bcrypt.compare(password, users.password)
-    }catch(err){
-        throw createError({
-            statusCode: 401,
-            statusMessage: "Password yang dimasukkan salah."
-        })
-    }
+    const compares = await bcrypt.compare(password, users.password)
+    if(!compares) throw createError({
+        statusCode: 401,
+        statusMessage: "Password yang dimasukkan salah."
+    })
+
     let isAdmin = false
     if(users.isAdmin){
         isAdmin = true
@@ -38,7 +36,7 @@ export default defineEventHandler(async (event)=>{
     }
     const config = useRuntimeConfig()
     const token = jwt.sign(payload,config.tokenKey,{
-        expiresIn: '1h'
+        expiresIn: '10s'
     })
     return {status:200, message: `Selamat datang ${users.firstName}`,token : token}
 })
