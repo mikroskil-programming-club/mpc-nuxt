@@ -96,7 +96,7 @@ const mobileMenuOpen = ref(false)
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <NuxtLink v-if="store.isAdmin" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
-        <a @click="handleLogout" v-if="store.isAuthenticated" class="text-sm ml-6 font-semibold leading-6 text-gray-900">Logout</a>
+        <NuxtLink  v-if="store.isAuthenticated" to="/profile" class="text-sm ml-6 font-semibold leading-6 text-gray-900">Profile</NuxtLink>
         <NuxtLink v-if="!store.isAuthenticated" to="/register" class="text-sm font-semibold leading-6 text-gray-900">Register <span aria-hidden="true">&rarr;</span></NuxtLink>
       </div>
     </nav>
@@ -130,6 +130,7 @@ const mobileMenuOpen = ref(false)
             </div>
             <div class="py-6">
               <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/profile" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Profile</NuxtLink>
               <NuxtLink @click="handleLogout" v-if="store.isAuthenticated" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</NuxtLink>
               <NuxtLink @click="mobileMenuOpen = false" v-if="!store.isAuthenticated" href="/register" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Register</NuxtLink>
               <NuxtLink @click="mobileMenuOpen = false" v-if="!store.isAuthenticated" href="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</NuxtLink>

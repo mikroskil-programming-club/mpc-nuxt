@@ -32,7 +32,8 @@ export default defineEventHandler(async (event)=>{
         isAdmin = true
     }
     const payload = {
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        nim:users.NIM
     }
     const config = useRuntimeConfig()
     const token = jwt.sign(payload,config.tokenKey,{
