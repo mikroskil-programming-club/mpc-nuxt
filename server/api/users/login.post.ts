@@ -36,7 +36,7 @@ export default defineEventHandler(async (event)=>{
     }
     const config = useRuntimeConfig()
     const token = jwt.sign(payload,config.tokenKey,{
-        expiresIn: '10s'
+        expiresIn: '1h'
     })
     return {status:200, message: `Selamat datang ${users.firstName}`,token : token}
 })
