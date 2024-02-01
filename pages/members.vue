@@ -7,17 +7,31 @@ import memberCard from '~/components/member-card.vue';
 const datas = ref([])
 const stats = ref({})
 
-onMounted(async()=>{
+const loadData = async()=>{
     let response = await axios.get('/api/users')
     datas.value = response.data
     response = await axios.get('/api/users/stats')
     stats.value = response.data
     console.log(datas,stats)
-})
+}
+
+onMounted(loadData)
 
 const handleSearch = async (e)=>{
     searchValue.value = e.target.value
     let response = await axios.post('/api/users/find',{data:searchValue.value})
+    datas.value = response.data
+}
+
+const handlePaid = async (e)=>{
+    searchValue.value = e.target.value
+    let response = await axios.post('/api/users/find/stats',{data:true})
+    datas.value = response.data
+}
+
+const handleUnPaid = async (e)=>{
+    searchValue.value = e.target.value
+    let response = await axios.post('/api/users/find/stats',{data:false})
     datas.value = response.data
 }
 
@@ -29,9 +43,9 @@ const handleSearch = async (e)=>{
             
             <input @change='handleSearch' placeholder="NIM atau Nama" class="p-2 my-4 w-[200px] md:w-[275px] lg:w-[400px] text-center rounded-lg outline-none shadow-lg">
             <div class="flex gap-5">
-                <div class="bg-green-200 p-2 rounded-lg">Paid   : {{ stats.paid }}</div>
-                <div class="bg-red-200 p-2 rounded-lg">Unpaid : {{ stats.unpaid }}</div>
-                <div class="bg-gray-200 p-2 rounded-lg">Total : {{ stats.total }}</div>
+                <div @click="handlePaid" class="bg-green-200 p-2 rounded-lg">Paid   : {{ stats.paid }}</div>
+                <div @click="handleUnPaid" class="bg-red-200 p-2 rounded-lg">Unpaid : {{ stats.unpaid }}</div>
+                <div @click="loadData" class="bg-gray-200 p-2 rounded-lg">Total : {{ stats.total }}</div>
             </div>
             
         </div>

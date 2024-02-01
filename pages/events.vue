@@ -1,3 +1,0 @@
-<template>
-    Events pages
-</template>

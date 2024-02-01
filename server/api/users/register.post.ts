@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt'
 
 export default defineEventHandler(async (event)=>{
     const {NIM, password, confirmPassword} = await readBody(event)
+    if(!NIM || !password || !confirmPassword) throw createError({
+        statusCode:400,
+        statusMessage: "NIM, Password atau Confirm Password harus diisi."
+    })
     if(password != confirmPassword) throw createError({
         statusCode: 400,
         statusMessage: "Password dan Confirm Password berbeda."
@@ -25,5 +29,5 @@ export default defineEventHandler(async (event)=>{
     },{
         password: hashPassword
     })
-    return {message: "Kamu berhasil terdaftar."}
+    return {status:201, message: "Kamu berhasil terdaftar."}
 })

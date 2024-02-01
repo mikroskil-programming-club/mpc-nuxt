@@ -5,6 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     const store = useStore()
     if(to.path == "/register" && store.isAuthenticated) return navigateTo('/')
     if(to.path == "/login" && store.isAuthenticated) return navigateTo('/')
-    if(to.path == "/members" && !store.isAuthenticated && !store.isAdmin) return navigateTo('/')
+    if(to.path == "/members" && !store.isAuthenticated && !store.isAdmin) return navigateTo('/login')
+    if(to.path == "/material" && !store.isAuthenticated) return navigateTo('/login')
   })
   

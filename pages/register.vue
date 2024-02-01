@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import alert from '~/components/alert.vue';
 
 const router = useRouter()
 const NIM = ref('')
@@ -17,17 +18,42 @@ function cpwHandle(e){
     cpw.value = e.target.value
 }
 
+const showAlert = ref(false)
+const responseMessage = ref('')
 async function submitHandle(){
-    const response = await axios.post('/api/users/register',{
-        NIM: NIM.value,
-        password: pw.value,
-        confirmPassword: cpw.value
-    })
-    console.log(response)
+    try{
+        const response = await axios.post('/api/users/register',{
+            NIM: NIM.value,
+            password: pw.value,
+            confirmPassword: cpw.value
+        })
+        if(response.data.status == 201){
+            showAlert.value=true
+            setTimeout(() => {
+                showAlert.value=false
+                router.push('/login')
+            }, 2400);
+            responseMessage.value = response.data.message
+        }
+    }catch(err){
+        if(err.response.data.statusCode){
+            showAlert.value=true
+            setTimeout(() => {
+                showAlert.value=false
+            }, 3600);
+            responseMessage.value = err.response.data.message
+        }  
+    }
+    
+    
+    
 }
 </script>
 
 <template>
+    <Transition name="fade">
+        <alert v-if='showAlert' :messages="responseMessage"/>
+    </Transition>
     <div class="flex border-solid border-2 border-gray-200 rounded-xl mx-auto w-fit max-w-full md:max-w-[800px] mt-8 overflow-hidden">
         <div class="hidden lg:block">
             <img class="object-cover max-w-[400px] h-full" src="../assets/images/forms_images.png" alt="">
@@ -54,5 +80,12 @@ async function submitHandle(){
         border-bottom: 1px solid gray;
         outline: none;
         padding:8px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: ease-in-out 0.25s;
+    }
+    .fade-enter-from, .fade-leave-to {
+        transform: translateY(40px);
     }
 </style>

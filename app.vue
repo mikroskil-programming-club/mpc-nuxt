@@ -93,7 +93,6 @@ const mobileMenuOpen = ref(false)
 
         <NuxtLink to="/news" class="text-sm font-semibold leading-6 text-gray-900">News</NuxtLink>
         <NuxtLink to="/schedule" class="text-sm font-semibold leading-6 text-gray-900">Schedule</NuxtLink>
-        <NuxtLink to="/events" class="text-sm font-semibold leading-6 text-gray-900">Events</NuxtLink>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <NuxtLink v-if="store.isAdmin" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
@@ -107,7 +106,7 @@ const mobileMenuOpen = ref(false)
         <div class="flex items-center justify-between">
           <NuxtLink href="/" class="-m-1.5 p-1.5 mx-auto">
             <span class="sr-only">Mikroskil Programming Club</span>
-            <img class="h-12 w-auto" src="./assets/images/logo_small.png" alt="" />
+            <img @click="mobileMenuOpen = false" class="h-12 w-auto" src="./assets/images/logo_small.png" alt="" />
           </NuxtLink>
           <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
             <span class="sr-only">Close menu</span>
@@ -128,7 +127,6 @@ const mobileMenuOpen = ref(false)
               </Disclosure>
               <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</NuxtLink>
               <NuxtLink @click="mobileMenuOpen = false" href="/schedule" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Schedule</NuxtLink>
-              <NuxtLink @click="mobileMenuOpen = false" href="/events" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Events</NuxtLink>
             </div>
             <div class="py-6">
               <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</NuxtLink>

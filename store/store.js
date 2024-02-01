@@ -7,7 +7,7 @@ export const useStore = defineStore('token',{
         isAuthenticated: false
     }),
     actions:{
-        setToken(token, isAdmin, isAuthenticated){
+        setToken(token){
             this.token = token
             localStorage.setItem('token',token)
             const decoded = jwtDecode(token)
