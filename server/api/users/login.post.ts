@@ -20,17 +20,16 @@ export default defineEventHandler(async (event)=>{
         statusCode: 401,
         statusMessage: "NIM atau Password salah."
     }) 
+    let isAdmin = false
+    if(users.isAdmin){
+        isAdmin = true
+    }
     const payload = {
-        NIM: users.NIM,
-        fullName: users.fullName
+        isAdmin: isAdmin
     }
     const config = useRuntimeConfig()
     const token = jwt.sign(payload,config.tokenKey,{
         expiresIn: '1h'
     })
-    let isAdmin = false
-    if(users.isAdmin){
-        isAdmin = true
-    }
-    return {status:200, token : token, isAdmin: isAdmin}
+    return {status:200, token : token}
 })

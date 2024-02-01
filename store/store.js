@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode"
+
 export const useStore = defineStore('token',{
     state: ()=>({
         token: null,
@@ -8,9 +10,9 @@ export const useStore = defineStore('token',{
         setToken(token, isAdmin, isAuthenticated){
             this.token = token
             localStorage.setItem('token',token)
-            this.isAdmin = isAdmin
-            localStorage.setItem('auth',isAdmin)
-            this.isAuthenticated = isAuthenticated
+            const decoded = jwtDecode(token)
+            this.isAdmin = decoded.isAdmin
+            this.isAuthenticated = true
         },
         reset(){
             this.token = null,
@@ -19,7 +21,5 @@ export const useStore = defineStore('token',{
             localStorage.clear()
         }
     },
-    persist:{
-        storage: persistedState.localStorage
-    }
+    persist:true
 })

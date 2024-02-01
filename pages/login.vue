@@ -8,12 +8,6 @@ const NIM = ref('')
 const pw = ref('')
 const store = useStore()
 
-onMounted(()=>{{
-  if(localStorage.getItem('token')){
-    store.setToken(localStorage.getItem('token'),localStorage.getItem('auth'),true)
-  }
-}})
-
 function nimHandle(e){
     NIM.value = e.target.value
 }
@@ -28,7 +22,7 @@ async function submitHandle(){
         password: pw.value
     })
     if(response.data.status == 200){
-        store.setToken(response.data.token,response.data.isAdmin,true)
+        store.setToken(response.data.token)
         router.push('/')
     }
 }
