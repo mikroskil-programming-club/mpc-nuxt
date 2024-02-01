@@ -1,7 +1,7 @@
 export const useStore = defineStore('token',{
     state: ()=>({
         token: null,
-        isAdmin:  false,
+        isAdmin:  null,
         isAuthenticated: false
     }),
     actions:{
@@ -18,5 +18,8 @@ export const useStore = defineStore('token',{
             this.isAuthenticated = false,
             localStorage.clear()
         }
+    },
+    persist:{
+        storage: persistedState.localStorage
     }
 })

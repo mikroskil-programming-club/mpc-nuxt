@@ -23,7 +23,7 @@ const handleSearch = async (e)=>{
     <div class="flex flex-col gap-8 items-center max-w-full">
         <input @change='handleSearch' placeholder="Pencarian menggunakan NIM atau Nama" class="p-2 my-4 w-[350px] md:w-[500px] text-center rounded-lg outline-none shadow-lg">
         <div class="flex w-full items-center justify-center">
-            <div class="grid max-w-[75%] grid-cols-1 md:grid-cols-3 gap-4 h-[75vh] overflow-scroll p-4">
+            <div class="flex max-w-[75%] flex-col md:grid md:grid-cols-3 gap-4 max-h-[75vh] overflow-scroll p-4">
             <memberCard v-for="data in datas" :nim='data.NIM' :name='data.fullName' :paid='data.paid' :semester="data.semester" :prodi="data.prodi"/>
             </div>
         </div>

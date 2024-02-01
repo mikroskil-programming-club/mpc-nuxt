@@ -38,13 +38,8 @@ const router = useRouter()
 function handleLogout(){
   store.reset()
   router.push('/')
+  router.go(0)
 }
-
-onMounted(()=>{{
-  if(localStorage.getItem('token')){
-    store.setToken(localStorage.getItem('token'),localStorage.getItem('auth'),true)
-  }
-}})
 
 const mobileMenuOpen = ref(false)
 </script>

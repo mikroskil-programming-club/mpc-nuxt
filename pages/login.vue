@@ -8,6 +8,12 @@ const NIM = ref('')
 const pw = ref('')
 const store = useStore()
 
+onMounted(()=>{{
+  if(localStorage.getItem('token')){
+    store.setToken(localStorage.getItem('token'),localStorage.getItem('auth'),true)
+  }
+}})
+
 function nimHandle(e){
     NIM.value = e.target.value
 }

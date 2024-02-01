@@ -7,7 +7,6 @@ const NIM = ref('')
 const pw = ref('')
 const cpw = ref('')
 
-
 function nimHandle(e){
     NIM.value = e.target.value
 }

@@ -14,10 +14,10 @@ export default defineEventHandler(async (event)=>{
     })
     if(!users.paid){
         users = await User.findOneAndUpdate({NIM:nim},{paid:true})
-        return "Berhasil mengubah status menjadi 'Completed'"
+        return {status:200, message : 'Berhasil mengubah status menjadi "Completed".'}
     }
     else{
         users = await User.findOneAndUpdate({NIM:nim},{paid:false})
-        return "Berhasil mengubah status menjadi 'Uncompleted"
+        return {status:200, message : 'Berhasil mengubah status menjadi "Uncompleted".'}
     }
 })
