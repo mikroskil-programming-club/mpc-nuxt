@@ -23,6 +23,11 @@ const showAlert = ref(false)
 const router = useRouter()
 const filterRef = ref('Filter')
 const loadData = async()=>{
+    document.addEventListener('keyup',(e)=>{
+    if(e.key === "Escape"){
+        isModalOpen.value = false
+    }
+    })
     try{
         responseMessage.value = "Mengambil data..."
         showAlert.value = true
@@ -195,7 +200,7 @@ async function handleSubmit(){
         
         <div class="flex items-center justify-center">
             <div class="flex bg-gray-200/30 border border-solid border-gray md:border-none md:bg-transparent rounded-md w-[350px] flex-col gap-8 md:grid md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-6 md:w-[auto] max-h-[70vh] overflow-scroll p-4">
-            <memberCard v-for="data in datas" :nim='data.NIM' :name='data.fullName' :paid='data.paid' :semester="data.semester" :prodi="data.prodi" :password="Boolean(data.password)"/>
+            <memberCard v-for="data in datas" :nim='data.NIM' :name='data.fullName' :paid='data.paid' :semester="data.semester" :prodi="data.prodi" :password="Boolean(data.password)" :isAdmin="data.isAdmin"/>
             </div>
         </div>
     </div>

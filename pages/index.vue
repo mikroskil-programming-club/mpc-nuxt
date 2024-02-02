@@ -16,7 +16,6 @@ async function loadData(){
         responseMessage.value = "Fetching images..."
         response = await axios.get('/api/task/currentWeek')
         currentImages.value = response.data.imagesLink
-        console.log(response.data)
         showAlert.value = false
     }catch(err){
         if(err.response.data.statusCode){

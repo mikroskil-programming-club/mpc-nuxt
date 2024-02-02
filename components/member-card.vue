@@ -4,7 +4,7 @@
     import axios from 'axios'
     import {useStore} from '~/store/store.js'
 
-    const props = defineProps(['nim', 'name', 'paid', 'semester', 'prodi', 'password'])
+    const props = defineProps(['nim', 'name', 'paid', 'semester', 'prodi', 'password', 'isAdmin'])
 
     const isModalOpen = ref(false)
     const modal = ref(null)
@@ -83,6 +83,11 @@
         console.log(response)
         isModalOpen.value = false
     }
+    document.addEventListener('keyup',(e)=>{
+if(e.key === "Escape"){
+    isModalOpen.value = false
+}
+})
 </script>
 
 <template>
@@ -95,9 +100,10 @@
         <div v-if="props.paid">Status pembayaran :
              <div class="text-green-300" >Completed</div>
             </div>
-        <div class='mt-4 font-semibold' v-if="store.isAdmin">
+        <div class='mt-4 font-semibold flex justify-between w-full' v-if="store.isAdmin">
             <div class="text-green-400 bg-emerald-100/60 shadow-md border-2 p-1 rounded-md border-emerald-200" v-if="props.password">Registered</div>
             <div class="text-red-400 bg-rose-100/60 shadow-md border-2 p-1 rounded-md border-rose-200" v-if="!props.password">Not Registered</div>
+            <div class="text-red-500 bg-rose-200/60 shadow-md border-2 p-1 rounded-md border-rose-300" v-if="props.isAdmin">Admin</div>
         </div>
         
     </div>
@@ -105,7 +111,7 @@
         <div class="root">
             <Transition name='modal'>
             <div class="modal-bg z-50" v-if="isModalOpen">
-                    <div ref='modal' class="flex flex-col w-[300px] shadow-lg rounded-lg justify-center gap-8 bg-white p-4">
+                    <div ref='modal' class="relative flex flex-col w-[350px] md:w-[400px] shadow-lg rounded-lg justify-center gap-8 bg-white p-4">
                         <div>
                             <div>NIM Mahasiswa</div>
                             <div class="">{{ props.nim }}</div>
@@ -122,10 +128,6 @@
                             <div>Program Studi</div>
                             <div>{{ props.prodi }}</div>
                         </div>
-                        <div v-if="store.isAdmin">
-                            <div v-if="props.password">Registered</div>
-                            <div v-if="!props.password">Not Registered</div>
-                        </div>
                         <div class="flex flex-col gap-1">
                             <div>Status pembayaran</div>
                             <div class="text-green-300" v-if="props.paid">Completed</div>
@@ -135,7 +137,11 @@
                                 <button v-if="!props.paid && store.isAdmin" @click="changeStatus" class="mt-2 rounded-md p-2 bg-green-200 hover:bg-green-300">Ubah status</button>
                                 <button v-if="store.isAdmin" @click="resetPassword" class="mt-2 rounded-md p-2 bg-red-400 hover:bg-red-500">Reset password</button>
                             </div>
-                            
+                        </div>
+                        <div v-if="store.isAdmin" class="absolute right-2 top-5 flex gap-2 items-center">
+                            <div class="text-green-400 bg-emerald-100/60 shadow-md border-2 p-1 rounded-md border-emerald-200" v-if="props.password">Registered</div>
+                            <div class="text-red-400 bg-rose-100/60 shadow-md border-2 p-1 rounded-md border-rose-200" v-if="!props.password">Not Registered</div>
+                            <div class="text-red-500 bg-rose-200/60 shadow-md border-2 p-1 rounded-md border-rose-300" v-if="props.isAdmin">Admin</div>
                         </div>
                     </div>
                 </div>

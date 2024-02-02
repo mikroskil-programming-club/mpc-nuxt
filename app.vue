@@ -126,7 +126,7 @@ const mobileMenuOpen = ref(false)
         <NuxtLink v-if="!store.isAuthenticated" to="/register" class="text-sm font-semibold leading-6 text-gray-900">Register <span aria-hidden="true">&rarr;</span></NuxtLink>
       </div>
     </nav>
-    <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
+    <Dialog as="div" class="relative z-[9999] lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
       <div class="fixed inset-0 z-10" />
       <DialogPanel class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div class="flex items-center justify-between">
@@ -151,7 +151,7 @@ const mobileMenuOpen = ref(false)
                   <DisclosureButton v-for="item in [...material]" :key="item.name" as="a" :href="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
                 </DisclosurePanel>
               </Disclosure>
-              <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</NuxtLink>
+              <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Berita Acara</NuxtLink>
             </div>
             <div class="py-6">
               <Disclosure v-if="store.isAdmin" as="div" class="-mx-3" v-slot="{ open }">
