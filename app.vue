@@ -95,7 +95,7 @@ const mobileMenuOpen = ref(false)
         <NuxtLink to="/schedule" class="text-sm font-semibold leading-6 text-gray-900">Schedule</NuxtLink>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <NuxtLink v-if="store.isAdmin" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
+        <NuxtLink v-if="store.isAuthenticated" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
         <NuxtLink  v-if="store.isAuthenticated" to="/profile" class="text-sm ml-6 font-semibold leading-6 text-gray-900">Profile</NuxtLink>
         <NuxtLink v-if="!store.isAuthenticated" to="/register" class="text-sm font-semibold leading-6 text-gray-900">Register <span aria-hidden="true">&rarr;</span></NuxtLink>
       </div>

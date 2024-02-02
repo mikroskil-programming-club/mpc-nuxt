@@ -14,17 +14,19 @@ const isModalOpen = ref(false)
 const modal = ref(null)
 onMounted(async ()=>{
     try{
+        showAlert.value = true
+        responseMessage.value = "Loading..."
         const response = await axios.get('/api/users/find/profile',{headers: {Authorization:`Bearer ${store.token}`}})
         data.value = response.data
+        showAlert.value = false
     }catch(err){
         if(err.response.data.statusCode){
             responseMessage.value = err.response.data.message
-            showAlert.value=true
             setTimeout(() => {
                 showAlert.value=false
                 store.reset()
                 router.push('/login')
-            }, 3600);
+            }, 1200);
         }
     }
     
@@ -37,7 +39,7 @@ const logoutHandle = () => {
         showAlert.value = false
         store.reset()
         router.push('/')
-    }, 3600)
+    }, 1200)
 }
 
 const cancelModal = ()=>{
@@ -55,7 +57,7 @@ const selection = ref(null)
         <alert v-if='showAlert' :messages="responseMessage"/>
     </Transition>
     <Transition name="modal">
-    <div v-if='isModalOpen' class="absolute w-screen h-screen flex top-0 left-0 justify-center items-center bg-black/50">
+    <div v-if='isModalOpen' class="z-50 fixed w-full h-full flex top-0 left-0 justify-center items-center bg-black/50">
             <div ref="modal" class="rounded-lg w-[350px] md:w-[450px] h-[450px] flex flex-col p-4 bg-white r">
                 <div v-if="!selection" class="flex flex-col gap-4 h-full justify-center items-center">
                     <div class="font-semibold my-4">Apa yang ingin diubah?</div>

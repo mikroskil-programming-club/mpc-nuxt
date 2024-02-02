@@ -19,25 +19,25 @@ const showAlert = ref(false)
 const responseMessage = ref('')
 async function submitHandle(){
     try{
+        showAlert.value = true
+        responseMessage.value = "Loading..."
         const response = await axios.post('/api/users/login',{
             NIM: NIM.value,
             password: pw.value
         })
         if(response.data.status == 200){
-            showAlert.value=true
+            responseMessage.value = response.data.message
             store.setToken(response.data.token)
             setTimeout(() => {
                 showAlert.value=false
                 router.push('/')
-            }, 2400);
-            responseMessage.value = response.data.message
+            }, 1200);
         }
     }catch(err){
         if(err.response.data.statusCode){
-            showAlert.value=true
             setTimeout(() => {
                 showAlert.value=false
-            }, 3600);
+            }, 1600);
             responseMessage.value = err.response.data.message
         } 
     }

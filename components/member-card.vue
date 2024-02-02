@@ -4,7 +4,7 @@
     import axios from 'axios'
     import {useStore} from '~/store/store.js'
 
-    const props = defineProps(['nim', 'name', 'paid', 'semester', 'prodi'])
+    const props = defineProps(['nim', 'name', 'paid', 'semester', 'prodi', 'password'])
 
     const isModalOpen = ref(false)
     const modal = ref(null)
@@ -65,7 +65,7 @@
                 setTimeout(() => {
                     showAlert.value=false
                     router.go(0)
-                }, 3600); 
+                }, 1600); 
             }
         }catch(err){
             if(err.response.data.statusCode){
@@ -76,7 +76,7 @@
                     showAlert.value=false
                     store.reset()
                     router.go(0)
-                }, 3600);
+                }, 1600);
             }
         }
         
@@ -86,7 +86,7 @@
 </script>
 
 <template>
-    <div @click="isModalOpen = true" class="border border-solid bg-white/30 backdrop-filter-md border-gray-200 rounded-md p-4 h-auto md:w-[auto] md:max-w-[400px]">
+    <div @click="isModalOpen = true" class="animate flex flex-col items-start justify-between border border-solid bg-white/30 backdrop-filter-md border-gray-200 rounded-md p-4 h-auto md:w-[auto] md:max-w-[400px]">
         <div>NIM Mahasiswa     : {{ props.nim }}</div>
         <div>Nama Mahasiswa    : {{ props.name }}</div>
         <div v-if="!props.paid">Status pembayaran :
@@ -95,11 +95,16 @@
         <div v-if="props.paid">Status pembayaran :
              <div class="text-green-300" >Completed</div>
             </div>
+        <div class='mt-4 font-semibold' v-if="store.isAdmin">
+            <div class="text-green-400 bg-emerald-100/60 shadow-md border-2 p-1 rounded-md border-emerald-200" v-if="props.password">Registered</div>
+            <div class="text-red-400 bg-rose-100/60 shadow-md border-2 p-1 rounded-md border-rose-200" v-if="!props.password">Not Registered</div>
+        </div>
+        
     </div>
     <Teleport to="#modal">
         <div class="root">
             <Transition name='modal'>
-            <div class="modal-bg" v-if="isModalOpen">
+            <div class="modal-bg z-50" v-if="isModalOpen">
                     <div ref='modal' class="flex flex-col w-[300px] shadow-lg rounded-lg justify-center gap-8 bg-white p-4">
                         <div>
                             <div>NIM Mahasiswa</div>
@@ -117,14 +122,18 @@
                             <div>Program Studi</div>
                             <div>{{ props.prodi }}</div>
                         </div>
+                        <div v-if="store.isAdmin">
+                            <div v-if="props.password">Registered</div>
+                            <div v-if="!props.password">Not Registered</div>
+                        </div>
                         <div class="flex flex-col gap-1">
                             <div>Status pembayaran</div>
                             <div class="text-green-300" v-if="props.paid">Completed</div>
                             <div class="text-red-300" v-if="!props.paid">Uncompleted</div>
                             <div class="grid grid-cols-2 gap-2">
-                                <button v-if="props.paid" @click="changeStatus" class="mt-2 rounded-md p-2 bg-red-200 hover:bg-red-300">Ubah status</button>
-                                <button v-if="!props.paid" @click="changeStatus" class="mt-2 rounded-md p-2 bg-green-200 hover:bg-green-300">Ubah status</button>
-                                <button @click="resetPassword" class="mt-2 rounded-md p-2 bg-red-400 hover:bg-red-500">Reset password</button>
+                                <button v-if="props.paid && store.isAdmin" @click="changeStatus" class="mt-2 rounded-md p-2 bg-red-200 hover:bg-red-300">Ubah status</button>
+                                <button v-if="!props.paid && store.isAdmin" @click="changeStatus" class="mt-2 rounded-md p-2 bg-green-200 hover:bg-green-300">Ubah status</button>
+                                <button v-if="store.isAdmin" @click="resetPassword" class="mt-2 rounded-md p-2 bg-red-400 hover:bg-red-500">Reset password</button>
                             </div>
                             
                         </div>
@@ -144,7 +153,7 @@
     position:absolute;
     top:    0;
     left:   0;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.3);
     width: 100%;
     height: 100%;
     display: flex;
@@ -165,5 +174,13 @@
     }
 .fade-enter-from, .fade-leave-to {
     transform: translateY(40px);
+}
+
+@keyframes popOut{
+    from{ transform: scale(0);
+    opacity:0}
+}
+.animate{
+    animation: popOut .5s ease-in-out;
 }
 </style>

@@ -22,26 +22,26 @@ const showAlert = ref(false)
 const responseMessage = ref('')
 async function submitHandle(){
     try{
+        showAlert.value = true
+        responseMessage.value = "Loading..."
         const response = await axios.post('/api/users/register',{
             NIM: NIM.value,
             password: pw.value,
             confirmPassword: cpw.value
         })
         if(response.data.status == 201){
-            showAlert.value=true
+            responseMessage.value = response.data.message
             setTimeout(() => {
                 showAlert.value=false
                 router.push('/login')
-            }, 2400);
-            responseMessage.value = response.data.message
+            }, 1200);
         }
     }catch(err){
         if(err.response.data.statusCode){
-            showAlert.value=true
+            responseMessage.value = err.response.data.message
             setTimeout(() => {
                 showAlert.value=false
-            }, 3600);
-            responseMessage.value = err.response.data.message
+            }, 1600);
         }  
     }
     
