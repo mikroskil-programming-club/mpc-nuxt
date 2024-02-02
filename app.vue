@@ -37,8 +37,8 @@ const router = useRouter()
 
 function handleLogout(){
   store.reset()
+  mobileMenuOpen.value = false
   router.push('/')
-  router.go(0)
 }
 
 const mobileMenuOpen = ref(false)

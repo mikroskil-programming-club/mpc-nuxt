@@ -159,13 +159,12 @@ async function handleSubmit(){
     <div class="flex flex-col gap-8 md:gap-6 mx-auto items-center">
         <div class="flex flex-col mt-4 items-center gap-2 md:gap-7 lg:gap-10 md:flex-row">
             <div class="flex items-center gap-2 lg:gap-5">
-                
                 <input @change='handleSearch' placeholder="NIM atau Nama" class="p-2 my-4 w-[300px] lg:w-[450px] text-center rounded-lg outline-none shadow-lg">
             </div>
             <div class="grid grid-cols-2 w-full gap-2 lg:gap-5">
-                <button v-if="store.isAdmin" @click="isModalOpen = true" class="bg-blue-200 p-2 px-6 rounded-lg h-full shadow-md hover:bg-blue-300">Tambah user</button>
+                <button v-if="store.isAdmin" @click="isModalOpen = true" class="bg-blue-200 p-2 px-6 rounded-lg shadow-md hover:bg-blue-300">Tambah user</button>
                 <Popover class="relative z-0">
-                    <PopoverButton class="z-0 flex w-full justify-center gap-3 bg-blue-200 ml-4 p-2 rounded-lg h-full shadow-md hover:bg-blue-300">
+                    <PopoverButton class="z-0 flex w-full justify-center gap-3 bg-blue-200 ml-4 p-2 rounded-lg shadow-md hover:bg-blue-300">
                         <div>{{ filterRef }}</div>
                         <ChevronDownIcon class="h-5 w-5" aria-hidden="true" />
                     
