@@ -28,6 +28,7 @@ const loadData = async()=>{
         showAlert.value = true
         let response = await axios.get('/api/users',{headers:{Authorization:`Bearer ${store.token}`}})
         datas.value = response.data
+        datas.value = datas.value.sort((a,b)=>{a.fullName, b.fullName})
         response = await axios.get('/api/users/stats')
         stats.value = response.data
         filterRef.value = "Filter"
@@ -71,7 +72,7 @@ const handleFilter = async (close, e) => {
     }else if(filter == "Registered"){
         const response = await axios.post('/api/users/find/status',{data:true})
         datas.value = response.data
-    }else{
+    }else if(filter == "Not Registered"){
         const response = await axios.post('/api/users/find/status',{data:false})
         datas.value = response.data
     }
@@ -161,10 +162,10 @@ async function handleSubmit(){
             <div class="flex items-center gap-2 lg:gap-5">
                 <input @change='handleSearch' placeholder="NIM atau Nama" class="p-2 my-4 w-[300px] lg:w-[450px] text-center rounded-lg outline-none shadow-lg">
             </div>
-            <div class="grid grid-cols-2 w-full gap-2 lg:gap-5">
-                <button v-if="store.isAdmin" @click="isModalOpen = true" class="bg-blue-200 p-2 px-6 rounded-lg shadow-md hover:bg-blue-300">Tambah user</button>
-                <Popover class="relative z-0">
-                    <PopoverButton class="z-0 flex w-full justify-center gap-3 bg-blue-200 ml-4 p-2 rounded-lg shadow-md hover:bg-blue-300">
+            <div class="flex gap-2 lg:gap-5 content-center">
+                <button v-if="store.isAdmin" @click="isModalOpen = true" class="bg-blue-200 p-2 px-6 rounded-lg shadow-md hover:bg-blue-300 w-[150px]">Tambah user</button>
+                <Popover class="relative z-1">
+                    <PopoverButton class="flex w-[160px] justify-between gap-3 bg-blue-200 p-2 rounded-lg shadow-md hover:bg-blue-300">
                         <div>{{ filterRef }}</div>
                         <ChevronDownIcon class="h-5 w-5" aria-hidden="true" />
                     
@@ -174,12 +175,12 @@ async function handleSubmit(){
                     <PopoverPanel v-slot="{ close }" class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
                         <div class="w-screen max-w-[200px] flex-auto overflow-hidden rounded-3xl bg-white/50 backdrop-blur-lg text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                             <div class="p-4">
-                                <div @click="handleFilter(close,$event)" v-for="item in filter" :key="item.name" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70">
+                                <div @click="handleFilter(close,$event)" v-for="item in filter" :key="item.name" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
                                         {{ item.name }}
                                 </div>
                             </div>
-                                <div class="flex items-center justify-center bg-gray-50">
-                                    <div class="p-2">Clear filters</div>
+                                <div @click="loadData" class="flex items-center justify-center bg-gray-50 hover:bg-gray-200">
+                                    <div class="p-2 cursor-pointer">Clear filters</div>
                                 </div>
                         </div>
                     </PopoverPanel>

@@ -25,11 +25,16 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
 const material = [
-  { name: 'Coach Materials', description: 'All coaches material over the week.', href: '/material/coach', icon: AcademicCapIcon },
-  { name: 'Discussed Materials', description: 'All material that have been discussed together with us.', href: '/material', icon: FolderIcon},
-  { name: 'Video Materials', description: 'All material explanation by videos.', href: '/material/video', icon: PlayIcon},
+  { name: 'Materi Coach', description: 'Kumpulan materi yang dipelajari bersama coach.', href: '/material/coach', icon: AcademicCapIcon },
+  { name: 'Materi Diskusi', description: 'Kumpulan materi tambahan yang dibuat oleh pengurus MPC.', href: '/material', icon: FolderIcon},
+  { name: 'Materi Video', description: 'Kumpulan video yang bertujuan untuk menjelaskan materi diskusi.', href: '/material/video', icon: PlayIcon},
 ]
-const callsToAction = { name: 'Contact us', href: '#', icon: InboxIcon }
+
+const content = [
+  { name: 'Update Materials', description: 'Publish, update, or delete materials.', href: '#'},
+  { name: 'Update Events', description: 'Publish new events, update current events, or delete current events.', href: '/events'},
+  { name: 'Update Schedule', description: 'Update current schedule.', href: '/schedule'},
+]
 
 import {useStore} from './store/store.js'
 const store = useStore()
@@ -44,7 +49,7 @@ function handleLogout(){
 const mobileMenuOpen = ref(false)
 </script>
 <template>
-  <header class="z-1 border-b bg-white/30 backdrop-blur-md">
+  <header class="relative z-50 border-b bg-white/30 backdrop-blur-md">
     <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
       <div class="flex lg:flex-1">
         <NuxtLink to="/" class="-m-1.5 p-1.5">
@@ -83,16 +88,37 @@ const mobileMenuOpen = ref(false)
               </div>
               <div class="grid divide-x divide-gray-900/5 bg-gray-50">
                 <NuxtLink to="/contact-us" class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100">
-                  <component :is="InboxIcon" class="h-6 w-6 flex-none text-gray-400 group-hover:text-indigo-400" aria-hidden="true" />
-                  Contact us
+                  <component :is="InboxIcon" class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                  Hubungi kami
                 </NuxtLink>
               </div>
             </PopoverPanel>
           </transition>
         </Popover>
+        <NuxtLink to="/news" class="text-sm font-semibold leading-6 text-gray-900">Berita Acara</NuxtLink>
+        <NuxtLink v-if="!store.isAuthenticated" to="/contact-us" class="text-sm font-semibold leading-6 text-gray-900">Hubungi kami</NuxtLink>
+        <Popover class="relative">
+          <PopoverButton v-if="store.isAdmin" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            Content Setting
+            <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+          </PopoverButton>
 
-        <NuxtLink to="/news" class="text-sm font-semibold leading-6 text-gray-900">News</NuxtLink>
-        <NuxtLink to="/schedule" class="text-sm font-semibold leading-6 text-gray-900">Schedule</NuxtLink>
+          <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
+            <PopoverPanel class="absolute z-1 -left-8 top-full mt-3 w-[300px] max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              <div class="p-4">
+                <div v-for="item in content" :key="item.name" class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                  <div class="flex-auto">
+                    <NuxtLink :to="item.href" class="block font-semibold text-gray-900">
+                      {{ item.name }}
+                      <span class="absolute inset-0"/>
+                    </NuxtLink>
+                    <p class="mt-1 text-gray-600">{{ item.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </PopoverPanel>
+          </transition>
+        </Popover>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <NuxtLink v-if="store.isAuthenticated" to="/members" class="text-sm font-semibold leading-6 text-gray-900">Members</NuxtLink>
@@ -110,15 +136,15 @@ const mobileMenuOpen = ref(false)
           </NuxtLink>
           <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
             <span class="sr-only">Close menu</span>
-            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+            <XMarkIcon class="h-6 w-6" aria-hidden="true"/>
           </button>
         </div>
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
-              <Disclosure as="div" class="-mx-3" v-slot="{ open }">
+              <Disclosure v-if="store.isAuthenticated" as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Product
+                  Material
                   <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
                 </DisclosureButton>
                 <DisclosurePanel class="mt-2 space-y-2">
@@ -126,9 +152,17 @@ const mobileMenuOpen = ref(false)
                 </DisclosurePanel>
               </Disclosure>
               <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</NuxtLink>
-              <NuxtLink @click="mobileMenuOpen = false" href="/schedule" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Schedule</NuxtLink>
             </div>
             <div class="py-6">
+              <Disclosure v-if="store.isAdmin" as="div" class="-mx-3" v-slot="{ open }">
+                <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  Contents Settings
+                  <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
+                </DisclosureButton>
+                <DisclosurePanel class="mt-2 space-y-2">
+                  <DisclosureButton v-for="item in [...content]" :key="item.name" as="a" :href="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
+                </DisclosurePanel>
+              </Disclosure>
               <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/members" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Members</NuxtLink>
               <NuxtLink @click="mobileMenuOpen = false" v-if="store.isAuthenticated" href="/profile" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Profile</NuxtLink>
               <NuxtLink @click="handleLogout" v-if="store.isAuthenticated" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</NuxtLink>
