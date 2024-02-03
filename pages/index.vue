@@ -30,7 +30,11 @@ onMounted(loadData)
 
 <template>
     <Transition name="fade">
-        <alert v-if='showAlert' :messages="responseMessage"/>
+        <div v-if="showAlert" class="fixed w-full h-full flex justify-center my-[200px]">
+                <div class="text-center fixed align-middle bg-blue-400 rounded-lg p-4 max-h-[60px] w-[300px] md:w-[400px]" >{{ responseMessage }}</div>
+                <div class="fixed text-center align-middle animate-pulse  w-[300px] bg-blue-200 rounded-lg p-4 w-[300px] max-h-[60px] md:w-[400px]">{{ responseMessage }}</div>
+                
+        </div>
     </Transition>
     <div v-if="currentImages && task_data" class="flex flex-col md:flex-row p-4 gap-5 items-center md:justify-center divide-y divide-gray-200">
         <div class="flex items-center justify-center w-auto max-w-[392px] md:h-[405px] md:w-[400px] rounded-xl overflow-hidden p-2 border-2 border-gray-200 bg-white/30">
@@ -44,6 +48,13 @@ onMounted(loadData)
 </template>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: all 0.5s;
+}
+.fade-enter-from, .fade-leave-to {
+    transform: scale(0.8);
+    opacity: 0;
+}
 ::-webkit-scrollbar{
     display:none
 }

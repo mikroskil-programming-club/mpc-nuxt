@@ -31,9 +31,9 @@ const material = [
 ]
 
 const content = [
-  { name: 'Update Materials', description: 'Publish, update, or delete materials.', href: '#'},
-  { name: 'Update Events', description: 'Publish new events, update current events, or delete current events.', href: '/events'},
-  { name: 'Update Schedule', description: 'Update current schedule.', href: '/schedule'},
+  { name: 'Update Materials', description: 'Publish, update, or delete materials.', href: '/manage/material'},
+  { name: 'Update Events', description: 'Publish new events, update current events, or delete current events.', href: '/manage/events'},
+  { name: 'Update Schedule', description: 'Update current schedule.', href: '/manage/schedule'},
 ]
 
 import {useStore} from './store/store.js'
