@@ -51,6 +51,8 @@ const logoutHandle = () => {
     }, 1200)
 }
 
+
+
 const cancelModal = ()=>{
     isModalOpen.value = false
     selection.value = null
@@ -77,6 +79,7 @@ const oldPassword = ref(null)
 const newPassword = ref(null)
 const confirmPassword = ref(null)
 const hidePassword = ref(true)
+const hidePasswordValue = ref('SHOW')
 
 const submitName = async()=>{
     try{
@@ -232,8 +235,8 @@ const submitChange = async()=>{
                 <div v-if="selection == 'pw'" class="flex flex-col h-full" >
                     <div class="flex justify-between w-full items-center border-b-2 p-4">
                         <div class="text-lg font-semibold">Ubah Password</div>
-                        <div @click="hidePassword = false" class="cursor-pointer bg-red-300 w-[60px] text-center rounded-md" v-if="hidePassword">Show</div>
-                        <div @click="hidePassword = true" class="cursor-pointer bg-teal-300 w-[60px] text-center rounded-md" v-if="!hidePassword">Stop</div>
+                        <div @mouseup="hidePassword = true, hidePasswordValue = 'SHOW'" @mousedown="hidePassword = false, hidePasswordValue = 'HIDE'" class="cursor-pointer bg-gray-300 w-[60px] text-center rounded-md hover:bg-gray-400 font-semibold">{{ hidePasswordValue }}</div>
+                        <!-- <div @click="hidePassword = true" class="cursor-pointer bg-teal-300 w-[60px] text-center rounded-md" v-if="!hidePassword">Stop</div> -->
                     </div>
                     <div class="flex flex-col h-full border-b-1 border-solid border-gray-200 w-full p-4 gap-2">
                         <div>

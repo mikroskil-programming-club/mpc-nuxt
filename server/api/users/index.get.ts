@@ -15,8 +15,14 @@ export default defineEventHandler(async (event)=>{
     try{
         const config = useRuntimeConfig()
         const decoded = jwt.verify(token, config.tokenKey)
-        const users = await User.find()
-        return users
+        if(decoded.isAdmin == true){
+            const users = await User.find()
+            return users
+        }else{
+          const users = await User.find().select({password:0, isAdmin:0})
+          return users
+        }
+        
     }catch(err){
       throw createError({
         statusCode: 401,

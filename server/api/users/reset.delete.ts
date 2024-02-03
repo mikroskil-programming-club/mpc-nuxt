@@ -10,7 +10,7 @@ export default defineEventHandler(async (event)=>{
     })
     try{
         const decoded = jwt.verify(token, config.tokenKey)
-        if(!decoded) throw createError({
+        if(!decoded.isAdmin) throw createError({
             statusCode:401,
             statusMessage: 'Sesi telah berakhir.'})
         let users = await User.findOneAndUpdate({NIM:nim},{$unset:{password:null}})

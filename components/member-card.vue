@@ -32,7 +32,7 @@
                 setTimeout(() => {
                     showAlert.value=false
                     router.go(0)
-                }, 3600); 
+                }, 1200); 
             }
         }catch(err){
             if(err.response.data.statusCode){
@@ -42,8 +42,8 @@
                 setTimeout(() => {
                     showAlert.value=false
                     store.reset()
-                    router.go(0)
-                }, 7200);
+                    router.push('/')
+                }, 1600);
             }
         }
         
@@ -65,7 +65,7 @@
                 setTimeout(() => {
                     showAlert.value=false
                     router.go(0)
-                }, 1600); 
+                }, 1200); 
             }
         }catch(err){
             if(err.response.data.statusCode){
@@ -75,7 +75,7 @@
                 setTimeout(() => {
                     showAlert.value=false
                     store.reset()
-                    router.go(0)
+                    router.push('/')
                 }, 1600);
             }
         }

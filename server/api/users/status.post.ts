@@ -9,8 +9,12 @@ export default defineEventHandler(async (event)=>{
         statusMessage: "Silahkan login kembali."
     })
     try{
-        const decoded = jwt.verify(token, config.tokenKey)
         let users = await User.findOne({NIM:nim})
+        const decoded = jwt.verify(token, config.tokenKey)
+        if(decoded.isAdmin != true) throw createError({
+            statusCode:401,
+            statusMessage: "Kamu tidak memiliki akses tersebut."
+        })
         if(!users) throw createError({
             statusCode:401,
             statusMessage: 'Something is wrong with the endpoint.'
