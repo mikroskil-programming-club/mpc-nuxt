@@ -73,7 +73,7 @@ onMounted(loadData)
             <alert v-if="showAlert" :messages="responseMessage"/>
     </Transition>
     <div class="flex justify-center mt-10 md:items-center">
-        <div class="flex flex-col divide-y-2 md:flex-row border-2 border-gray-300 border-2 border-gray-300 shadow-md rounded-xl overflow-hidden divide-x-2A">
+        <div class="flex flex-col divide-y-2 md:flex-row border-2 border-gray-300 border-2 border-gray-300 shadow-md rounded-xl overflow-hidden md:divide-y-0 divide-x-2">
             <div class="w-[300px] h-[300px] md:h-[400px] md:w-[400px]">
                 <img class="h-full object-cover" :src="currentImages">
             </div>

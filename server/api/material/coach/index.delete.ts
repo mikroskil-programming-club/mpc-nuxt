@@ -20,9 +20,16 @@ export default defineEventHandler(async (event)=>{
             statusMessage: "Sesi telah berakhir."
         })
     }
+    const {_id} = await readBody(event)
+    if(!_id) throw createError({
+        statusCode: 405,
+        statusMessage: "Data yang dikirim kosong."
+    })
     try{
-        const coachMaterial = CoachMaterial.find().distinct("week")
-        return coachMaterial
+        await CoachMaterial.deleteOne({
+            _id: _id
+        })
+        return {status:201, message:"Berhasil menghapus data."}
     }catch(err){
         if(err.statusCode == 405){
             throw createError(err)

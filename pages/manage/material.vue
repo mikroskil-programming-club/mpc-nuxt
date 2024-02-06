@@ -33,7 +33,7 @@ const responseMessage = ref('')
 const title = ref('')
 const week = ref('')
 const link = ref('')
-
+const router = useRouter()
 
 watch(selected, ()=>{
     title.value = ""
@@ -51,7 +51,10 @@ const sendFiles = async ()=>{
             link: link.value
         },{headers:{Authorization:`Bearer ${store.token}`}})
         responseMessage.value = response.data.message
-        setTimeout(()=>{showAlert.value = false},600)
+        setTimeout(()=>{
+            showAlert.value = false
+            router.go(0)
+    },600)
     }catch(err){
         if(err.response.data.statusCode){
             responseMessage.value = err.response.data.message
