@@ -9,7 +9,7 @@ const currentImages = ref(null)
 async function loadData(){
     try{
         showAlert.value = true
-        responseMessage.value = "Fetching tasks..."
+        responseMessage.value = "Fetching images..."
         let response = await axios.get('/api/task/currentWeek')
         currentImages.value = response.data.imagesLink
         showAlert.value = false
@@ -55,6 +55,11 @@ async function handleSubmit(){
             setTimeout(()=>{
                 showAlert.value = false
             },1600)
+        }else{
+            responseMessage.value = "Terjadi kesalahan..."
+            setTimeout(()=>{
+                showAlert.value = false
+            },1600)
         }
     }
 }
@@ -67,7 +72,7 @@ onMounted(loadData)
     <Transition name="fade">
             <alert v-if="showAlert" :messages="responseMessage"/>
     </Transition>
-    <div class="flex justify-center mt-5 md:items-center">
+    <div class="flex justify-center mt-10 md:items-center">
         <div class="flex flex-col divide-y-2 md:flex-row border-2 border-gray-300 border-2 border-gray-300 shadow-md rounded-xl overflow-hidden divide-x-2A">
             <div class="w-[300px] h-[300px] md:h-[400px] md:w-[400px]">
                 <img class="h-full object-cover" :src="currentImages">
