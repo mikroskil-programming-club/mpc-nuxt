@@ -29,7 +29,7 @@ const handleSubmit = (e) => {
         <div class="flex flex-col items-center justify-center">
             <div class="flex justify-center py-10 font-semibold text-2xl">Form Submission</div>
             <form @submit="handleSubmit" name="contact" method="POST"
-                class="w-[300px] mx-auto md:w-[800px] flex flex-col gap-4" netlify data-netlify="true">
+                class="w-[300px] mx-auto md:w-[800px] flex flex-col gap-4" data-netlify="true">
                 <input type="hidden" name="form-name" value="contact" />
                 <input @change="handleNIM" class="p-4 rounded-xl shadow-lg" placeholder="NIM" type="text" name="NIM" required />
                 <input @change="handleEmail" class="p-4 rounded-xl shadow-lg" placeholder="Email" type="email"
