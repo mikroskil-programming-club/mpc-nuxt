@@ -66,7 +66,7 @@ const mobileMenuOpen = ref(false)
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
           <PopoverButton v-if="store.isAuthenticated" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-            Material
+            Materi
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
 
@@ -99,7 +99,7 @@ const mobileMenuOpen = ref(false)
         <NuxtLink v-if="!store.isAuthenticated" to="/contact-us" class="text-sm font-semibold leading-6 text-gray-900">Hubungi kami</NuxtLink>
         <Popover class="relative">
           <PopoverButton v-if="store.isAdmin" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-            Content Setting
+            Content Settings
             <ChevronDownIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
 
@@ -144,7 +144,7 @@ const mobileMenuOpen = ref(false)
             <div class="space-y-2 py-6">
               <Disclosure v-if="store.isAuthenticated" as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Material
+                  Materi
                   <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
                 </DisclosureButton>
                 <DisclosurePanel class="mt-2 space-y-2">
@@ -156,7 +156,7 @@ const mobileMenuOpen = ref(false)
             <div class="py-6">
               <Disclosure v-if="store.isAdmin" as="div" class="-mx-3" v-slot="{ open }">
                 <DisclosureButton class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Contents Settings
+                  Content Settings
                   <ChevronDownIcon :class="[open ? 'rotate-180' : '', 'h-5 w-5 flex-none']" aria-hidden="true" />
                 </DisclosureButton>
                 <DisclosurePanel class="mt-2 space-y-2">

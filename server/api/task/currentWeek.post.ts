@@ -13,11 +13,18 @@ export default defineEventHandler(async (event)=>{
         statusMessage: "Silahkan login kembali."
     })
     const config = useRuntimeConfig()
-    const decoded = jwt.verify(token, config.tokenKey)
-    if(!decoded) throw createError({
-        statusCode: 401,
-        statusMessage: "Sesi telah berakhir."
-    })
+    try{
+        const decoded = await jwt.verify(token, config.tokenKey)
+        if(!decoded) throw createError({
+            statusCode: 401,
+            statusMessage: "Sesi telah berakhir."
+        })
+    }catch(err){
+        throw createError({
+            statusCode: 401,
+            statusMessage: "Sesi telah berakhir."
+        })
+    }
     const { imagesLink } = await readBody(event)
     if(!imagesLink) throw createError({
         statusCode: 404,
