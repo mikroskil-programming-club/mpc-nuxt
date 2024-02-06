@@ -1,9 +1,11 @@
 import { DiscussionMaterial } from '~/models/discussionMaterial'
+import { VideoMaterial } from '~/models/videoMaterial'
+import { CoachMaterial } from '~/models/coachMaterial'
 import jwt from 'jsonwebtoken'
 
 export default defineEventHandler(async (event)=>{
-    const { week, title, pdfLink } = await readBody(event)
-    if(!week || !title || !pdfLink) throw createError({
+    const { selection, week, title, link } = await readBody(event)
+    if(!week || !title || !link) throw createError({
         statusCode: 404,
         statusMessage: "Data harus diisi semua."
     })
@@ -13,14 +15,40 @@ export default defineEventHandler(async (event)=>{
         statusMessage: "Silahkan login kembali."
     })
     try{
-        await DiscussionMaterial.create({
-            week: week,
-            title: title,
-            pdfLink: pdfLink
-        })
-        return { status: 200, message: `Materi berhasil di tambahkan pada minggu ${week}.` }
+        if(selection == "discussion"){
+            await DiscussionMaterial.create({
+                week: week,
+                title: title,
+                pdfLink: link
+            })
+            return { status: 200, message: `Materi diskusi berhasil di tambahkan pada minggu ${week}.` }
+        }
+        else if(selection == "coach"){
+            await CoachMaterial.create({
+                week: week,
+                title: title,
+                pdfLink: link
+            })
+            return { status: 200, message: `Materi coach berhasil di tambahkan pada minggu ${week}.` }
+        }
+        else if(selection == "discussion"){
+            await VideoMaterial.create({
+                week: week,
+                title: title,
+                videoLink: link
+            })
+            return { status: 200, message: `Materi video berhasil di tambahkan pada minggu ${week}.` }
+        }
+        else{
+            throw createError({
+                statusCode: 405,
+                statusMessage: "Pilihan tidak tersedia."
+            })
+        }
     }catch(err){
-        console.log(err)
+        if(err.statusCode == 405){
+            throw createError(err)
+        }
         throw createError({
             statusCode: 400,
             statusMessage: "Terjadi kesalahan pada endpoint."

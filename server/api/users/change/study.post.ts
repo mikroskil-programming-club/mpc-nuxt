@@ -26,7 +26,7 @@ export default defineEventHandler(async (event)=>{
             prodi: prodi,
             semester: semester
         })
-        return  {status: 200, message: "Berhasil mengubah data nama user."}
+        return  {status: 200, message: "Berhasil mengubah data studi user."}
     }catch(err){
         throw createError({
             statusCode: 401,

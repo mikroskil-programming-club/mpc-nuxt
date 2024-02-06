@@ -31,9 +31,12 @@ function handleInput(e){
     responseMessage.value = "Mengupload gambar..."
     image.value = e.target.files[0]
     setTimeout(()=>{
-        showAlert.value = false
-        currentImages.value = imageBase64.base64.value
-    },600)
+        responseMessage.value = "Mohon tunggu..."
+        setTimeout(()=>{
+            showAlert.value = false
+            currentImages.value = imageBase64.base64.value
+        },600)
+    },1200)
 }
 const router = useRouter()
 async function handleSubmit(){

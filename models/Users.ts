@@ -28,7 +28,9 @@ const UserSchema = new Schema({
     isAdmin:{
         type: Boolean,
     }, //Don't display, only return as token
-
+    kelas:{
+        type: String,
+    }
 })
 
 export const User = model<any>('User',UserSchema)

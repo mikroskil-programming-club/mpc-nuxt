@@ -220,7 +220,7 @@ const submitChange = async()=>{
                         </div>
                         <div>
                             <div class="text-center font-semibold my-2">Kelas</div>
-                            <input @change="e => kelas = e.target.value" class="w-full outline-none border-b-[1px] p-2 text-center" disabled placeholder="Sedang di perbaiki."/>
+                            <input :value="kelas" @change="e => kelas = e.target.value" class="w-full outline-none border-b-[1px] p-2 "/>
                         </div>
                         <div>
                             <div class="text-center font-semibold my-2">Semester</div>
