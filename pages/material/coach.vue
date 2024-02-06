@@ -123,12 +123,12 @@ async function handleDelete(data_id){
                     </div>
                 </div>
             
-                <div v-if="selection" class="p-1 flex flex-col gap-2  overflow-none">
+                <div v-if="selection" class="p-1 items-center flex flex-col gap-4  overflow-none">
                     <div class="mx-2 font-bold text-lg text-center">
                             {{ selection.title }}
                     </div>
                     <iframe class="rounded-xl border-2 border-gray-200 shadow-md" v-if="selection" :src="selection.pdfLink" width="360px" height="500px" frameborder="0" scrolling="no" allowfullscreen></iframe>
-                    <div @click="handleDelete(selection._id)" v-if="store.isAdmin" class="font-semibold text-red-400 mx-2 cursor-pointer items-center bg-red-100 border-2 border-rose-200 px-4 rounded-md hover:bg-red-200 hover:text-red-500 mx-auto">
+                    <div @click="handleDelete(selection._id)" v-if="store.isAdmin" class="font-semibold text-red-400 mx-2 cursor-pointer items-center bg-red-100 border-2 border-rose-200 px-4 rounded-md hover:bg-red-200 hover:text-red-500 mx-auto p-1 px-2">
                         Delete
                     </div>
                 </div>
