@@ -15,6 +15,15 @@ export default defineEventHandler(async (event)=>{
         statusMessage: "Silahkan login kembali."
     })
     try{
+        const config = useRuntimeConfig()
+        await jwt.verify(token, config.tokenKey)
+    }catch(err){
+        throw createError({
+            statusCode: 401,
+            statusMessage: "Sesi telah berakhir."
+        })
+    }
+    try{
         if(selection == "discussion"){
             await DiscussionMaterial.create({
                 week: week,
@@ -31,7 +40,7 @@ export default defineEventHandler(async (event)=>{
             })
             return { status: 200, message: `Materi coach berhasil di tambahkan pada minggu ${week}.` }
         }
-        else if(selection == "discussion"){
+        else if(selection == "video"){
             await VideoMaterial.create({
                 week: week,
                 title: title,
