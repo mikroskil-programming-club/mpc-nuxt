@@ -6,6 +6,10 @@ background: linear-gradient(331deg, rgba(8,255,202,0.1516981792717087) 0%, rgba(
     width: 100vw;
     height: 100vh
 }
+
+::-webkit-scrollbar{
+    display: none;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

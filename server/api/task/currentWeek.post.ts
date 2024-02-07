@@ -2,23 +2,14 @@ import { CurrentWeek } from "~/models/currentWeek"
 import jwt from 'jsonwebtoken'
 
 export default defineEventHandler(async (event)=>{
-    const headers = getRequestHeaders(event).authorization
-    if(!headers) throw createError({
-        statusCode: 401,
-        statusMessage: "Silahkan login kembali."
-    })
-    const token = headers?.split(' ')[1]
+    const token = getRequestHeaders(event).authorization?.split(' ')[1]
     if(!token) throw createError({
         statusCode: 401,
         statusMessage: "Silahkan login kembali."
     })
     const config = useRuntimeConfig()
     try{
-        const decoded = await jwt.verify(token, config.tokenKey)
-        if(!decoded) throw createError({
-            statusCode: 401,
-            statusMessage: "Sesi telah berakhir."
-        })
+        await jwt.verify(token, config.tokenKey)
     }catch(err){
         throw createError({
             statusCode: 401,

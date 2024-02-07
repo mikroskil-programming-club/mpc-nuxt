@@ -192,4 +192,7 @@ a{
 a:hover{
   color:gray;
 }
+::-webkit-scrollbar{
+  display: none;
+}
 </style>
