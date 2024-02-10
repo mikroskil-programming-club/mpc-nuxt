@@ -42,10 +42,10 @@ onMounted(loadData)
                 <div class="fonts text-2xl font-semibold my-6 lg:w-[500px]">Welcome to <br>Mikroskil Programming Club</div>
                 <div class="flex flex-col gap-3 text-justify ">
                     <p>
-                        <span class="text-teal-400 font-semibold">Mikroskil Programming Club</span> is a students club that focuses on learning, expertising towards algorithms and complete tasks related to competitive programming. 
+                        <span class="text-teal-600 font-semibold">Mikroskil Programming Club</span> is a students club that focuses on learning, expertising towards algorithms and complete tasks related to competitive programming. 
                     </p>
                     <p>
-                        We are based in <span class="text-teal-400 font-semibold"> Mikroskil University, North Sumatera, Medan, Indonesia. </span> 
+                        We are based in <span class="text-teal-600 font-semibold"> Mikroskil University, North Sumatera, Medan, Indonesia. </span> 
                     </p>
                     <p>
                         Our aim is to improve the logical thinking and problem solving skills of our member, together with fun exercises, and mentoring sessions with our coach.
@@ -63,10 +63,11 @@ onMounted(loadData)
             </div>
         </div>
     </div>
-    <footer class="fonts bg-white/30 border-t mt-10 border-gray-200 w-full flex flex-col justify-center items-center text-xs text-gray-400 p-4">
-        <div>Copyright ©2023 - 2024</div>
-        <div>MPC Universitas Mikroskil</div>
+    <footer v-if="currentImages && task_data" class="fonts bg-white/30 border-t mt-10 border-gray-200 w-full flex flex-col justify-center items-center text-xs text-gray-400 p-4">
+            <div>Copyright ©2023 - 2024</div>
+            <div>MPC Universitas Mikroskil</div>
     </footer>
+    
     
     
 </template>
