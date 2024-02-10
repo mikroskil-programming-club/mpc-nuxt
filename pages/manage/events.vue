@@ -64,6 +64,31 @@ async function handleSubmit(){
     }
 }
 
+async function handleDelete(){
+    try{
+        showAlert.value = true
+        responseMessage.value = "Menghapus gambar..."
+        const response = await axios.delete("/api/task/currentWeek",{headers:{Authorization:`Bearer ${store.token}`}})
+        responseMessage.value = response.data.message
+        setTimeout(()=>{
+                showAlert.value = false
+                router.go(0)
+            },1200)
+    }catch(err){
+        if(err.response.data.statusCode){
+            responseMessage.value = err.response.data.message
+            setTimeout(()=>{
+                showAlert.value = false
+            },1600)
+        }else{
+            responseMessage.value = "Terjadi kesalahan..."
+            setTimeout(()=>{
+                showAlert.value = false
+            },1600)
+        }
+    }
+}
+
 onMounted(loadData)
     
 </script>
@@ -77,7 +102,8 @@ onMounted(loadData)
             <div class="w-[300px] h-[300px] md:h-[400px] md:w-[400px]">
                 <img class="h-full object-cover" :src="currentImages">
             </div>
-            <div class="w-[300px] flex flex-col bg-white/40 md:w-[400px] p-4 gap-8">
+            <div class="relative w-[300px] flex flex-col bg-white/40 md:w-[400px] p-4 gap-8">
+                <div @click="handleDelete()" class="absolute right-0 bottom-0 my-5 rounded-md mx-4 border-2 border-red-400 bg-rose-200 p-1 hover:bg-rose-300">Delete</div>
                 <div class="text-xl font-semibold">Upload image</div>
                 <input @input="handleInput" type='file'>
                 <button class="bg-gray-200 w-[150px] p-2 hover:bg-gray-300 rounded-lg" @click="handleSubmit">Submit</button>

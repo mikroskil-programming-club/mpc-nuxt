@@ -8,12 +8,12 @@ import alert from '~/components/alert.vue';
 import { onClickOutside } from '@vueuse/core';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
-const filter = [
+const filter = ref([
   { name: 'Paid' },
   { name: 'Unpaid'},
   { name: 'Registered'},
   { name: 'Not Registered'},
-]
+])
 
 const datas = ref([])
 const stats = ref({})
@@ -65,7 +65,7 @@ const handleSearch = async (e)=>{
 const handleFilter = async (close, e) => {
     responseMessage.value = "Mengambil data..."
     showAlert.value = true
-    const filter = e.target.textContent
+    const filter = e.target.id
     filterRef.value = filter
     close()
     if(filter == "Paid") {
@@ -178,10 +178,20 @@ async function handleSubmit(){
 
                     <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
                     <PopoverPanel v-slot="{ close }" class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-                        <div class="w-screen max-w-[200px] flex-auto overflow-hidden rounded-3xl bg-white/50 backdrop-blur-lg text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                        <div class="font-semibold w-screen max-w-[200px] flex-auto overflow-hidden rounded-3xl bg-white/50 backdrop-blur-lg text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                            <div class="flex justify-center p-2 mt-2 items-center bg-200/70">Total : {{ stats.total }}</div>
                             <div class="p-4">
-                                <div @click="handleFilter(close,$event)" v-for="item in filter" :key="item.name" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
-                                        {{ item.name }}
+                                <div id="Paid" @click="handleFilter(close,$event)" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
+                                        Paid: {{ stats.paid }}
+                                </div>
+                                <div id="Unpaid" @click="handleFilter(close,$event)" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
+                                        Unpaid: {{ stats.unpaid }}
+                                </div>
+                                <div id="Registered" v-if="store.isAdmin" @click="handleFilter(close,$event)" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
+                                        Registered: {{ stats.registered }}
+                                </div>
+                                <div id="Not Registered" v-if="store.isAdmin" @click="handleFilter(close,$event)" class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-200/70 cursor-pointer">
+                                        Not Registered: {{ stats.unregistered }}
                                 </div>
                             </div>
                                 <div @click="loadData" class="flex items-center justify-center bg-gray-50 hover:bg-gray-200">

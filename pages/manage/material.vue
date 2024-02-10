@@ -83,8 +83,8 @@ let filteredSelection = computed(() =>
     </Transition>
     
     <div class="flex flex-col justify-center items-center m-10 gap-2">
-        <div class="flex flex-col md:flex-row bg-white/30 border-2 border-gray-200 p-2 gap-2 rounded-xl shadow-lg">
-            <div class="flex flex-col justify-center md:justify-start md:items-start items-center w-[375px] gap-5 md:w-[400px] h-[500px]  p-2 md:p-4">
+        <div class="flex flex-col md:flex-row bg-white/30 border-2 border-gray-200 p-2 gap-2 rounded-xl shadow-lg w-[375px] md:w-auto">
+            <div class="flex flex-col justify-center md:justify-start md:items-start items-center w-[350px] gap-5 md:w-[400px] h-[500px]  p-2 md:p-4">
                 <div class="relative z-10 flex justify-center md:justify-start w-72">
                     <Combobox v-model="selected" nullable>
                         <div class="relative mt-1">
@@ -165,7 +165,7 @@ let filteredSelection = computed(() =>
             </div>
             <div class="border-r-2 border-l-2 border-gray-200">
                 <div v-if="!link" class=" flex justify-center items-center h-[500px] w-[375px] md:w-[400px]">PREVIEW</div>
-                <iframe v-if="link" :src="link" class="h-[500px] w-[375px] md:w-[400px]" frameborder="0" scrolling="no" allowfullscreen title="week 1.pdf"></iframe>
+                <iframe v-if="link" :src="link" class="h-[500px]  w-[350px] md:w-[400px]" frameborder="0" scrolling="no" allowfullscreen title="week 1.pdf"></iframe>
             </div>
             <Disclosure v-if="!link" v-slot="{ open }">
                 <DisclosureButton
@@ -193,7 +193,7 @@ let filteredSelection = computed(() =>
                                     class="h-5 w-5"
                                 />
                                 </DisclosureButton>
-                                <DisclosurePanel class="px-4 w-[350px] pb-2 pt-4 text-sm text-gray-600">
+                                <DisclosurePanel class="px-4 w-[320px] md:w-[350px] pb-2 pt-4 text-sm text-gray-600">
                                 Choose the file you want to upload to database -> Open the file in OneDrive -> Click on three dots '•••' -> Click on embed -> Copy only the link after src="link" -> Paste it in the PDF Link section -> Wait until the PDF loads up in the preview, then fills in the form, and submit.
                                 </DisclosurePanel>
                             </Disclosure>
@@ -207,7 +207,7 @@ let filteredSelection = computed(() =>
                                     class="h-5 w-5"
                                 />
                                 </DisclosureButton>
-                                <DisclosurePanel class="px-4 w-[350px] pb-2 pt-4 text-sm text-gray-600">
+                                <DisclosurePanel class="px-4 w-[320px] md:w-[350px] pb-2 pt-4 text-sm text-gray-600">
                                     Make sure you had access to edit, and view the content. If there's still none, ask for those who have full access to the files to get the embed link. Using the "share" link won't work.
                                 </DisclosurePanel>
                             </Disclosure>
@@ -221,8 +221,22 @@ let filteredSelection = computed(() =>
                                     class="h-5 w-5"
                                 />
                                 </DisclosureButton>
-                                <DisclosurePanel class="px-4 w-[350px] pb-2 pt-4 text-sm text-gray-600">
+                                <DisclosurePanel class="px-4 w-[320px] md:w-[350px] pb-2 pt-4 text-sm text-gray-600">
                                     Yes, you obviously can. Just type the same week, even the same title, all of it will be stored and viewed in the "Materi" section
+                                </DisclosurePanel>
+                            </Disclosure>
+                            <Disclosure as="div" class="mt-2" v-slot="{ open }">
+                                <DisclosureButton
+                                class="flex w-full justify-between rounded-lg bg-white/30 px-4 py-2 text-left text-sm hover:bg-gray-100"
+                                >
+                                <span>How to get Video Link from YouTube?</span>
+                                <ChevronUpIcon
+                                    :class="open ? 'rotate-180 transform' : ''"
+                                    class="h-5 w-5"
+                                />
+                                </DisclosureButton>
+                                <DisclosurePanel class="px-4 w-[320px] md:w-[350px] pb-2 pt-4 text-sm text-gray-600">
+                                    First find a YouTube video that you want to embed into the website, click share, -> embed, and then copy the link inside the src="link"
                                 </DisclosurePanel>
                             </Disclosure>
                         </div>
