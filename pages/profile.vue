@@ -177,6 +177,16 @@ const submitChange = async()=>{
     }
 }
 
+const hideValueHandle = () => {
+    if(hidePassword.value == true){
+        hidePasswordValue.value = "HIDE"
+        hidePassword.value = false
+    }else if(hidePassword.value == false){
+        hidePasswordValue.value = "SHOW"
+        hidePassword.value = true
+    }
+}
+
 </script>
 
 <template>
@@ -235,7 +245,8 @@ const submitChange = async()=>{
                 <div v-if="selection == 'pw'" class="flex flex-col h-full" >
                     <div class="flex justify-between w-full items-center border-b-2 p-4">
                         <div class="text-lg font-semibold">Ubah Password</div>
-                        <div @mouseup="hidePassword = true, hidePasswordValue = 'SHOW'" @mousedown="hidePassword = false, hidePasswordValue = 'HIDE'" class="cursor-pointer bg-gray-300 w-[60px] text-center rounded-md hover:bg-gray-400 font-semibold">{{ hidePasswordValue }}</div>
+                        <div @click="hideValueHandle" class="md:hidden cursor-pointer bg-gray-300 w-[80px] text-center rounded-md hover:bg-gray-400 p-1 font-semibold">{{ hidePasswordValue }}</div>
+                        <div @mouseup="hidePassword = true, hidePasswordValue = 'SHOW'" @mousedown="hidePassword = false, hidePasswordValue = 'HIDE'" class="hidden md:block cursor-pointer bg-gray-300 w-[80px] text-center rounded-md hover:bg-gray-400 p-1 font-semibold">{{ hidePasswordValue }}</div>
                         <!-- <div @click="hidePassword = true" class="cursor-pointer bg-teal-300 w-[60px] text-center rounded-md" v-if="!hidePassword">Stop</div> -->
                     </div>
                     <div class="flex flex-col h-full border-b-1 border-solid border-gray-200 w-full p-4 gap-2">

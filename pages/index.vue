@@ -37,9 +37,9 @@ onMounted(loadData)
         </div>
     </Transition>
     <div v-if="currentImages && task_data" class="flex flex-col items-center p-4 lg:p-0">
-        <div class="relative my-5 lg:mt-0 flex flex-col border-2 bg-white/30 border-gray-200 lg:border-0 lg:w-full lg:flex-row w-full rounded-xl overflow-hidden max-w-[392px] lg:max-w-full lg:rounded-none">
-            <div class="order-last m-5 lg:m-0 lg:absolute text-slate-900 lg:text-black h-full flex flex-col justify-center lg:mx-7 max-w-[400px]">
-                <div class="fonts text-2xl font-semibold my-6 lg:w-[500px]">Welcome to <br>Mikroskil Programming Club</div>
+        <div class="relative my-5 lg:mt-5 flex flex-col border-2 lg:bg-white bg-white/30 border-gray-200 lg:w-[90%] overflow-hidden lg:flex-row w-full rounded-xl overflow-hidden max-w-[392px] lg:max-w-full lg:rounded-md md:max-w-[90%] md:flex-row">
+            <div class="order-last md:order-first m-5 lg:m-0 2xl:absolute text-slate-900 lg:h-[400px] lg:text-black h-full flex flex-col justify-center lg:mx-7 max-w-[400px]">
+                <div class="fonts text-2xl font-semibold my-6 lg:w-[500px] md:w-[400px]">Welcome to <br>Mikroskil Programming Club</div>
                 <div class="flex flex-col gap-3 text-justify ">
                     <p>
                         <span class="text-teal-600 font-semibold">Mikroskil Programming Club</span> is a students club that focuses on learning, expertising towards algorithms and complete tasks related to competitive programming. 
@@ -52,13 +52,13 @@ onMounted(loadData)
                     </p>
                 </div>
             </div>
-            <img class="h-[200px] lg:h-full object-cover" src="../assets/images/banner.jpg">
+            <img class="h-[200px] object-cover md:h-auto md:object-right lg:object-right lg:w-full" src="../assets/images/banner.jpg">
         </div>
         <div class="flex flex-col md:flex-row items-center md:justify-center divide-y divide-gray-200 gap-5">
-            <div class="flex items-center justify-center w-auto max-w-[392px] md:h-[405px] md:w-[400px] rounded-xl overflow-hidden p-2 border-2 border-gray-200 bg-white/30">
+            <div class="flex items-center justify-center w-auto max-w-[392px] md:max-w-[400px] md:h-[405px] rounded-xl overflow-hidden p-2 border-2 border-gray-200 bg-white/30">
                 <img class="rounded-xl h-full object-cover" :src="currentImages">
             </div>
-            <div class="flex bg-white/30 rounded-xl flex-col border-2 divide-y h-[290px] md:h-[405px] overflow-scroll">
+            <div class="flex bg-white/30 rounded-xl flex-col border-2 divide-y h-[290px] md:h-[405px] md:max-w-[400px] overflow-scroll">
                 <taskCard v-for="task in task_data" :task_id="task.no" :task_name="task.task" :task_status="task.status"/>
             </div>
         </div>
