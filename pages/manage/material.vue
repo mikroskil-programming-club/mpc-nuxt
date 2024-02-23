@@ -14,8 +14,6 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { useStore } from '~/store/store';
-import { useBase64 } from '@vueuse/core';
-
 import { ChevronUpIcon, ChevronRightIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
 
 const selection = [
@@ -24,7 +22,7 @@ const selection = [
   { value: "video", name: 'Video Material' },
 ]
 
-const store = useStore
+const store = useStore()
 const selected = ref(selection[0])
 const query = ref('')
 const showAlert = ref(false)
@@ -155,7 +153,7 @@ let filteredSelection = computed(() =>
                                     <input :value="title" @change="e => title = e.target.value" class='bg-transparent border-b border-black outline-none p-1'>
                                 </div>
                                 <div class="flex flex-col gap-2">
-                                    <div>PDF Link : </div>
+                                    <div>Link : </div>
                                     <textarea :value="link" style="resize:none" @change="e => link = e.target.value" class='bg-transparent h-[110px] border border-black outline-none rounded-lg p-1'></textarea>
                                 </div>
                                 <button @click="sendFiles" class="bg-gray-200 w-[100px] p-1 rounded-lg mx-auto hover:bg-gray-300 shadow-md font-semibold">Submit</button>
