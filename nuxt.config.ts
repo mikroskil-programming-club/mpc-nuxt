@@ -19,5 +19,12 @@ export default defineNuxtConfig({
   '@pinia-plugin-persistedstate/nuxt'],
   pinia:{
     storesDirs:['./stores/**']
+  },
+  app:{
+    head:{
+      meta:[
+        {name:"google-site-verification", content:"dQDjWiw-CBzJkq9lpv4SJhmpl2pX5Lo88PwphgyJmTA"}
+      ]
+    }
   }
 })
