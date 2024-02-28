@@ -1,3 +1,9 @@
+<script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Contact Us"
+})
+</script>
+
 <template>
     <div class="flex flex-col divide-y p-10">
         <div class="flex justify-center py-10 pt-0 font-semibold text-2xl">Contact Us</div>

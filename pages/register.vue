@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Register"
+})
 import { ref } from 'vue'
 import axios from 'axios'
 import alert from '~/components/alert.vue';

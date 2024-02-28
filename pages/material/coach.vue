@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Coach"
+})
 import axios from 'axios'
 import { useStore } from '~/store/store';
 
@@ -120,12 +123,12 @@ async function handleDelete(data_id){
    </div>
    <div v-if="datas.length > 0" class="flex justify-center items-center">
            <div class="flex flex-col mt-10 md:hidden divide-y-2 bg-white/30 rounded-xl shadow-md border-2 border-gray-200">
-               <div class="flex gap-4 w-[375px] p-4  ">
+               <div class="flex gap-4 w-[375px] p-4 flex-wrap justify-center">
                    <div v-for="data in datas" >
                        <div @click="handleFilter(data)" class="mx-auto bg-gray-100 p-2 rounded-lg cursor-pointer shadow-md hover:bg-gray-200">Week {{ data }}</div>
                    </div>
                </div>
-               <div class=" flex w-[375px] gap-4 p-4" v-if="currentData">
+               <div class=" flex w-[375px] gap-4 p-4 flex-wrap" v-if="currentData">
                    <div @click="handleSelect(data)" class=" rounded-lg shadow-md p-2 cursor-pointer bg-gray-100 hover:bg-gray-200" v-for="data in currentData">
                        {{ data.title }}
                    </div>
@@ -144,7 +147,7 @@ async function handleDelete(data_id){
        <div class="hidden md:flex">
            <div class="flex flex mt-5 w-full h-full p-2 rounded-xl shadow-md border-2 border-gray-200 bg-white/30 backdrop-filter-md justify-center gap-4">
                <div class="flex flex-col gap-3 md:w-[200px] lg:w-[300px]">
-                   <div class="flex flex-col h-[300px] lg:h-[400px] gap-4 border-2 border-gray-200 p-4 rounded-xl">
+                   <div class="flex flex-col h-[300px] lg:h-[400px] gap-4 border-2 border-gray-200 p-4 rounded-xl overflow-scroll">
                        <div v-for="data in datas">
                            <div @click="handleFilter(data)" class="mx-auto bg-gray-100 p-2 rounded-lg cursor-pointer shadow-md hover:bg-gray-200">Week {{ data }}</div>
                        </div>

@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Login"
+})
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from '~/store/store';

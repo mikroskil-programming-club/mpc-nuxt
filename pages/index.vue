@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Home"
+})
 import axios from 'axios';
 import taskCard from '~/components/task-card.vue';
 const responseMessage = ref('')

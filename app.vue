@@ -95,7 +95,7 @@ const mobileMenuOpen = ref(false)
             </PopoverPanel>
           </transition>
         </Popover>
-        <NuxtLink to="/news" class="text-sm font-semibold leading-6 text-gray-900">Berita Acara</NuxtLink>
+        <!-- <NuxtLink to="/news" class="text-sm font-semibold leading-6 text-gray-900">Berita Acara</NuxtLink>  -->
         <NuxtLink v-if="!store.isAuthenticated" to="/contact-us" class="text-sm font-semibold leading-6 text-gray-900">Hubungi kami</NuxtLink>
         <Popover class="relative">
           <PopoverButton v-if="store.isAdmin" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -151,7 +151,7 @@ const mobileMenuOpen = ref(false)
                   <DisclosureButton v-for="item in [...material]" :key="item.name" as="a" :href="item.href" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</DisclosureButton>
                 </DisclosurePanel>
               </Disclosure>
-              <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Berita Acara</NuxtLink>
+              <!-- <NuxtLink @click="mobileMenuOpen = false" href="/news" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Berita Acara</NuxtLink> -->
             </div>
             <div class="py-6">
               <Disclosure v-if="store.isAdmin" as="div" class="-mx-3" v-slot="{ open }">

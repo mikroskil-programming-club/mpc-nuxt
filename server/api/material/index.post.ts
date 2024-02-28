@@ -9,6 +9,10 @@ export default defineEventHandler(async (event)=>{
         statusCode: 404,
         statusMessage: "Data harus diisi semua."
     })
+    if(isNaN(week))throw createError({
+        statusCode: 404,
+        statusMessage: "Pertemuan harus berupa angka."
+    })
     const token = getRequestHeaders(event).authorization?.split(' ')[1]
     if(!token) throw createError({
         statusCode: 400,

@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "MPC | Manage Materials"
+})
 import axios from 'axios';
 import { ref, computed } from 'vue'
 import {

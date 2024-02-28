@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | User Profile"
+})
 import { onClickOutside } from '@vueuse/core';
 import axios from 'axios'
 import { useStore } from '~/store/store'

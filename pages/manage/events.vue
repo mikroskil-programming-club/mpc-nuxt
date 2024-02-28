@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "MPC | Manage Events"
+})
 import { useBase64 } from '@vueuse/core';
 import axios from 'axios';
 import { useStore } from '~/store/store';

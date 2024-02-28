@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "MPC | Manage Schedule"
+})
 import axios from 'axios'; 
 import taskEdit from '~/components/task-edit.vue';
 

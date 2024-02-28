@@ -1,4 +1,7 @@
 <script setup>
+useSeoMeta({
+    title: "Mikroskil Programming Club | Member List"
+})
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
 const searchValue = ref('')
