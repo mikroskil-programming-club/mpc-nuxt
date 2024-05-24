@@ -75,7 +75,7 @@ const hideValueHandle = () => {
     >
       <div class="mx-auto font-semibold">Login</div>
       <hr />
-      <div class="flex flex-col gap-8">
+      <div class="flex grow flex-col gap-8 justify-center">
         <div class="flex flex-col">
           <div>NIM</div>
           <input @change="nimHandle" type="text" />
@@ -119,7 +119,7 @@ const hideValueHandle = () => {
           Login
         </button>
       </div>
-      <div class="flex-1 mt-4 mx-auto content-end">
+      <div class="mt-4 mx-auto content-end">
         <span>Don't have an account? &nbsp;</span>
         <NuxtLink class="text-green-400 hover:text-green-500" to="/register"
           >Register</NuxtLink
